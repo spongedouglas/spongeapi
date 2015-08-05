@@ -2,20 +2,20 @@
 Used as a wrapper for Studio API calls, as well as common functions for dynamic integrations.
 
 #### init(params:Object)
-**params.type:String**  
-*The type of animation ('canvas','edge','gwd','custom')*
-
-**params.initObj:Object**  
-*An object to use for initialization and dynamic parsing*
-
-**params.isDynamic:Boolean**  
-*Apply automatic dynamic parsing*
-
-**params.onReady:Function**  
-*Callback funciton to run after API is initalized*
-
-> **USAGE:**  
-> **DYNAMIC CANVAS**: *spongeapi.init({type:'canvas',initObj:loader,isDynamic:true});*
+> **params.type:String**  
+> *The type of animation ('canvas','edge','gwd','custom')*
+> 
+> **params.initObj:Object**  
+> *An object to use for initialization and dynamic parsing*
+> 
+> **params.isDynamic:Boolean**  
+> *Apply automatic dynamic parsing*
+> 
+> **params.onReady:Function**  
+> *Callback funciton to run after API is initalized*
+> 
+>> **USAGE:**  
+>> **DYNAMIC CANVAS**: *spongeapi.init({type:'canvas',initObj:loader,isDynamic:true});*
 
 #### openLanding(landingPage)
 *Open a landing page set up in studio (standard or dynamic)*  
