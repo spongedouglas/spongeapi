@@ -1,53 +1,53 @@
 # spongeapi
 Used as a wrapper for Studio API calls, as well as common functions for dynamic integrations.
 
-####  init(params:Object)
-###### params.type:String
+#### init(params:Object)
+**params.type:String**  
 *The type of animation ('canvas','edge','gwd','custom')*
 
-###### params.initObj:Object
+**params.initObj:Object**  
 *An object to use for initialization and dynamic parsing*
 
-###### params.isDynamic:Boolean
+**params.isDynamic:Boolean**  
 *Apply automatic dynamic parsing*
 
-###### params.onReady:Function
+**params.onReady:Function**  
 *Callback funciton to run after API is initalized*
 
-##### USAGE:
+**USAGE:**  
 **DYNAMIC CANVAS**: *spongeapi.init({type:'canvas',initObj:loader,isDynamic:true});*
 
-####  openLanding(landingPage)
+#### openLanding(landingPage)
 *Open a landing page set up in studio (standard or dynamic)*
-##### USAGE:
+**USAGE:**  
 *spongeapi.openLanding('Creative Landing Page')*
 
-####  openScreen(screenName)
+#### openScreen(screenName)
 *Open a screen set up in studio*
-##### USAGE:
+**USAGE:**  
 *spongeapi.openScreen('Screen Name')*
 
-####  getDynamicText(prop)
+#### getDynamicText(prop)
 *Retrieve dynamic text property.*
-##### USAGE:
+**USAGE:**  
 *spongeapi.getDynamicText('dynamic_text_property')*
 
-####  getDynamicImage(prop)
+#### getDynamicImage(prop)
 *Retrieve dynamic image url.*
-##### USAGE:
+**USAGE:**  
 *spongeapi.getDynamicImage('dynamic_image_property')*
 
-####  parseDynamicClasses()
+#### parseDynamicClasses()
 *Update text & images with dynamic assets & properties matching class names to signal processor properties*
 
-####  parseDynamicCanvasImages()
+#### parseDynamicCanvasImages()
 *Parse the flash library for dynamic images*
-##### USAGE:
+**USAGE:**  
 Rename bitmaps in the Flash library to match dynamic item text properties.
 
-####  parseDynamicCanvasText()
+#### parseDynamicCanvasText()
 *Automatically parses any movieclip instances on the main timeline whose name matches a dynamic text item property. These movieclip instances must contain a text instance named "txt".*
 
-##### USAGE:
+**USAGE:**  
 Rename bitmaps in the Flash library to match dynamic item text properties.
 
