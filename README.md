@@ -41,12 +41,12 @@ Used as a wrapper for Studio API calls, as well as common functions for dynamic 
 *Update text & images with dynamic assets & properties matching class names to signal processor properties*
 
 #### parseDynamicCanvasImages()
-> *Parse the flash library for dynamic images*
+*Parse the flash library for dynamic images*  
 > **USAGE:**  
 > Rename bitmaps in the Flash library to match dynamic item text properties.
 
 #### parseDynamicCanvasText()
-> *Automatically parses any movieclip instances on the main timeline whose name matches a dynamic text item property. These movieclip instances must contain a text instance named "txt".*
+*Automatically parses any movieclip instances on the main timeline whose name matches a dynamic text item property. These movieclip instances must contain a text instance named "txt".*
 
 > **USAGE:**  
 > Rename bitmaps in the Flash library to match dynamic item text properties.
