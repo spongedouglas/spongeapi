@@ -14,40 +14,40 @@ Used as a wrapper for Studio API calls, as well as common functions for dynamic 
 **params.onReady:Function**  
 *Callback funciton to run after API is initalized*
 
-**USAGE:**  
-**DYNAMIC CANVAS**: *spongeapi.init({type:'canvas',initObj:loader,isDynamic:true});*
+> **USAGE:**  
+> **DYNAMIC CANVAS**: *spongeapi.init({type:'canvas',initObj:loader,isDynamic:true});*
 
 #### openLanding(landingPage)
-*Open a landing page set up in studio (standard or dynamic)*
-**USAGE:**  
-*spongeapi.openLanding('Creative Landing Page')*
+*Open a landing page set up in studio (standard or dynamic)*  
+> **USAGE:**  
+> *spongeapi.openLanding('Creative Landing Page')*
 
 #### openScreen(screenName)
-*Open a screen set up in studio*
-**USAGE:**  
-*spongeapi.openScreen('Screen Name')*
+*Open a screen set up in studio*  
+> **USAGE:**  
+> *spongeapi.openScreen('Screen Name')*
 
 #### getDynamicText(prop)
-*Retrieve dynamic text property.*
-**USAGE:**  
-*spongeapi.getDynamicText('dynamic_text_property')*
+*Retrieve dynamic text property.*  
+> **USAGE:**  
+> *spongeapi.getDynamicText('dynamic_text_property')*
 
 #### getDynamicImage(prop)
-*Retrieve dynamic image url.*
-**USAGE:**  
-*spongeapi.getDynamicImage('dynamic_image_property')*
+*Retrieve dynamic image url.*  
+> **USAGE:**  
+> *spongeapi.getDynamicImage('dynamic_image_property')*
 
 #### parseDynamicClasses()
 *Update text & images with dynamic assets & properties matching class names to signal processor properties*
 
 #### parseDynamicCanvasImages()
-*Parse the flash library for dynamic images*
-**USAGE:**  
-Rename bitmaps in the Flash library to match dynamic item text properties.
+> *Parse the flash library for dynamic images*
+> **USAGE:**  
+> Rename bitmaps in the Flash library to match dynamic item text properties.
 
 #### parseDynamicCanvasText()
-*Automatically parses any movieclip instances on the main timeline whose name matches a dynamic text item property. These movieclip instances must contain a text instance named "txt".*
+> *Automatically parses any movieclip instances on the main timeline whose name matches a dynamic text item property. These movieclip instances must contain a text instance named "txt".*
 
-**USAGE:**  
-Rename bitmaps in the Flash library to match dynamic item text properties.
+> **USAGE:**  
+> Rename bitmaps in the Flash library to match dynamic item text properties.
 
