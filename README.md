@@ -53,5 +53,5 @@ Used as a wrapper for Studio API calls, as well as common functions for dynamic 
 *Automatically parses any movieclip instances on the main timeline whose name matches a dynamic text item property. These movieclip instances must contain a text instance named "txt".*
 
 > **USAGE:**  
-> Rename bitmaps in the Flash library to match dynamic item text properties.
+> Place `spongeapi.parseDynamicCanvasText()` in handleComplete function, before stage.update(); in Canvas HTML file
 

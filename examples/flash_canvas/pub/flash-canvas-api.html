@@ -35,7 +35,7 @@ function handleComplete() {
 	exportRoot = new lib.flashcanvasapi();
 	stage = new createjs.Stage(canvas);
 	stage.addChild(exportRoot);
-	
+	spongeapi.parseDynamicCanvasText();
 	stage.update();
 
 	createjs.Ticker.setFPS(lib.properties.fps);

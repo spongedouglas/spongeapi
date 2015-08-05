@@ -6,35 +6,18 @@ var iframeId, iid, handleSetupResponse;
 var spongeapi = spongeapi || {};
 spongeapi.initComplete = false;
 
-spongeapi.init = function(type,initObj,isDynamic,onReady){
-	//console.log('API.init('+type+')');
-	/*
-	DEFAULT PARAMS:
-		type:'custom',
-		initObj:{},
-		isDynamic:false,
-		onReady:undefined
+spongeapi.init = function(params){
 
-	CANVAS DYNAMIC PARAMS:
-		type:'canvas',
-		initObj:loader,
-		isDynamic:true,
-		onReady:undefined
-
-	GOOGLE WEB DESIGNER DYNAMIC PARAMS:
-		type:'gwd',
-		initObj:gwdAd,
-		isDynamic:true,
-		onReady:undefined
-	*/
 	iid = window.location.search.slice(1);
 	window.spongecell = window.spongecell || {};
-	spongeapi.type = type;
-	spongeapi.initObj = initObj;
-	spongeapi.isDynamic = isDynamic;
-	spongeapi.onReady = onReady;
+
+	spongeapi.type = params.type;
+	spongeapi.initObj = params.initObj;
+	spongeapi.isDynamic = params.isDynamic;
+	spongeapi.onReady = params.onReady;
+	spongeapi.testData = params.testData;
+
 	if(window == parent.top){
-		
 		handleSetupResponse();
 	} else {
 		parent.postMessage(JSON.stringify({
@@ -49,7 +32,6 @@ spongeapi.init = function(type,initObj,isDynamic,onReady){
 
 
 spongeapi.openScreen = function(screenName){
-	//console.log('API::openScreen('+screenName+')');
 	parent.postMessage(JSON.stringify({
 	  iid: iid,
 	  topic: 'nav',
@@ -59,7 +41,6 @@ spongeapi.openScreen = function(screenName){
 };
 
 spongeapi.openLanding = function(landingPage){
-	//console.log('API::openLanding('+landingPage+')');
 	parent.postMessage(JSON.stringify({
 	    iid: iid,
 	    topic: 'nav',
@@ -69,12 +50,10 @@ spongeapi.openLanding = function(landingPage){
 };
 
 spongeapi.getDynamicText = function(prop){
-	//console.log('API::getDynamicText('+prop+')');
 	return (spongecell.apiData.properties) ? spongecell.apiData.properties[prop].text : prop;
 };
 
 spongeapi.getDynamicImage = function(prop){
-	//console.log('API::getDynamicImage('+prop+')');
 	return (spongecell.apiData.assets) ? spongecell.apiData.assets[prop].src : prop;
 };
 

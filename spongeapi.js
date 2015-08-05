@@ -10,10 +10,13 @@ spongeapi.init = function(params){
 
 	iid = window.location.search.slice(1);
 	window.spongecell = window.spongecell || {};
+
 	spongeapi.type = params.type;
 	spongeapi.initObj = params.initObj;
 	spongeapi.isDynamic = params.isDynamic;
 	spongeapi.onReady = params.onReady;
+	spongeapi.testData = params.testData;
+
 	if(window == parent.top){
 		handleSetupResponse();
 	} else {
@@ -75,17 +78,6 @@ spongeapi.parseEdge = function()
 
 spongeapi.parseDynamicCanvasImages = function()
 {
-	console.log('API::parseDynamicCanvas()');
-	// PARSE THE FLASH LIBRARY FOR DYNAMIC IMAGES
-
-	/* INSTRUCTIONS:
-	Simply rename bitmaps in the Flash library 
-	to match dynamic item text properties.
-
-	Apply by passing "true" to the "isDynamic"
-	parameter in spongeapi.init
-	*/
-	//console.log(lib.properties.manifest);
 	var libImg;
 	for(var i=0; libImg = lib.properties.manifest[i]; i++)
 	{
@@ -97,54 +89,15 @@ spongeapi.parseDynamicCanvasImages = function()
 }
 spongeapi.parseDynamicCanvasText = function()
 {
-	//console.log('API::parseDynamicCanvasText()');
-	// PARSE THE FLASH LIBRARY FOR DYNAMIC TEXT
-
-	/* INSTRUCTIONS:
-
-	Place spongeapi.parseDynamicCanvasText() in 
-	handleComplete function, before stage.update();
-	
-	/*** MANUAL TARGETING
-	Problem: 
-	You have a textfield named "ctaTxt" inside 
-	a movieclip named "ctaMC", and a dynamic text
-	item property named "dynamic_cta_txt".
-	
-	Solution:
-	Add the following line in handleComplete 
-	function, before stage.update():
-
-	exportRoot.ctaMC.ctaTxt.text = spongeapi.getDynamicText("dynamic_cta_txt");
-
-	/*** AUTO PARSING 
-	The loop below will automatically parse any 
-	movieclip instances on the main timeline 
-	whose name matches a dynamic text item property.
-
-	These movieclip instances must contain a 
-	text instance named "txt".
-
-	*/
-
 	for (var property in spongecell.apiData.properties) {
     	if(exportRoot[property]){
     		exportRoot[property].txt.text = spongeapi.getDynamicText(property);
     	}
     }
-
-
 }
 
 spongeapi.parseDynamicClasses = function()
 {
-	console.log('API::parseDynamicClasses()');
-	/*
-
-	UPDATE TEXT & IMAGES WITH DYNAMIC ASSETS & PROPERTIES
-	MATCHING CLASS NAMES TO SIGNAL PROCESSOR PROPERTIES
-
-	*/
 	var el;
 	
 
@@ -168,21 +121,6 @@ spongeapi.parseDynamicClasses = function()
 	}
 }
 
-var ie = (function(){
-
-    var undef,
-        v = 3,
-        div = document.createElement('div'),
-        all = div.getElementsByTagName('i');
-
-    while (
-        div.innerHTML = '<!--[if gt IE ' + (++v) + ']><i></i><![endif]-->',
-        all[0]
-    );
-
-    return v > 4 ? v : undef;
-
-}());
 handleSetupResponse = function(message) {
 	if(!spongeapi.initComplete){
 		window.spongecell.apiData = message || {};
@@ -207,7 +145,6 @@ handleSetupResponse = function(message) {
 			if(spongeapi.isDynamic && spongecell.apiData.properties) spongeapi.parseDynamicClasses();
 			break;
 			case 'edge':
-			console.log('edge');
 			spongeapi.parseEdge();
 			break;
 			case 'custom':
@@ -221,12 +158,6 @@ handleSetupResponse = function(message) {
 window.addEventListener('message', function(event) {
   var message = event.data;
   if (message) {
-  	
-  	if(!ie || ie > 9){
-    	console.log('NOT IE9');
-    } else {
-    	console.log('IS IE9');
-    }
 	eval(message.callback)(message.data);
 
   }
