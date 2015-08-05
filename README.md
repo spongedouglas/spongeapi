@@ -11,7 +11,9 @@ The type of animation ('canvas','edge','gwd','custom')
 An object to use for initialization and dynamic parsing
 
 **@param {Boolean} spongeapi.isDynamic**
+
 Apply automatic dynamic parsing
 
 **@param {Function} spongeapi.onReady**
+
 Callback funciton to run after API is initalized
