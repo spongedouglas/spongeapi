@@ -15,10 +15,10 @@ Used as a wrapper for Studio API calls, as well as common functions for dynamic 
 > *Callback funciton to run after API is initalized*
 
 > **USAGE:**  
-> **DYNAMIC CANVAS**:  
+> *DYNAMIC CANVAS*:  
 > `spongeapi.init({type:'canvas',initObj:loader,isDynamic:true});`
 > 
-> **DYNAMIC GOOGLE WEB DESIGNER**:  
+> *DYNAMIC GOOGLE WEB DESIGNER*:  
 > `spongeapi.init({type:'gwd',initObj:gwdAd,isDynamic:true});`
 
 #### openLanding(landingPage)
