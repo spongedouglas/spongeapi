@@ -89,11 +89,15 @@ spongeapi.parseDynamicCanvasImages = function()
 }
 spongeapi.parseDynamicCanvasText = function()
 {
+	
+
 	for (var property in spongecell.apiData.properties) {
     	if(exportRoot[property]){
     		exportRoot[property].txt.text = spongeapi.getDynamicText(property);
     	}
     }
+
+
 }
 
 spongeapi.parseDynamicClasses = function()
@@ -145,6 +149,7 @@ handleSetupResponse = function(message) {
 			if(spongeapi.isDynamic && spongecell.apiData.properties) spongeapi.parseDynamicClasses();
 			break;
 			case 'edge':
+			console.log('edge');
 			spongeapi.parseEdge();
 			break;
 			case 'custom':

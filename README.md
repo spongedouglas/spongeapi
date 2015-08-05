@@ -55,3 +55,11 @@ Used as a wrapper for Studio API calls, as well as common functions for dynamic 
 > **USAGE:**  
 > Place `spongeapi.parseDynamicCanvasText()` in handleComplete function, before stage.update(); in Canvas HTML file
 
+####MANUAL TARGETING
+>_Problem:_
+>You have a textfield named "ctaTxt" inside a movieclip named "ctaMC", and a dynamic text item property named "dynamic_cta_txt".
+
+>_Solution:_
+>Add the following line on a frame inside the ctaMC: 
+>`this.ctaTxt.text = spongeapi.getDynamicText("dynamic_cta_txt");`
+
