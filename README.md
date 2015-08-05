@@ -20,22 +20,22 @@ Used as a wrapper for Studio API calls, as well as common functions for dynamic 
 #### openLanding(landingPage)
 *Open a landing page set up in studio (standard or dynamic)*  
 > **USAGE:**  
-> *spongeapi.openLanding('Creative Landing Page')*
+> `spongeapi.openLanding('Creative Landing Page')`
 
 #### openScreen(screenName)
 *Open a screen set up in studio*  
 > **USAGE:**  
-> *spongeapi.openScreen('Screen Name')*
+> `spongeapi.openScreen('Screen Name')`
 
 #### getDynamicText(prop)
 *Retrieve dynamic text property.*  
 > **USAGE:**  
-> *spongeapi.getDynamicText('dynamic_text_property')*
+> `spongeapi.getDynamicText('dynamic_text_property')`
 
 #### getDynamicImage(prop)
 *Retrieve dynamic image url.*  
 > **USAGE:**  
-> *spongeapi.getDynamicImage('dynamic_image_property')*
+> `spongeapi.getDynamicImage('dynamic_image_property')`
 
 #### parseDynamicClasses()
 *Update text & images with dynamic assets & properties matching class names to signal processor properties*
