@@ -13,9 +13,13 @@ Used as a wrapper for Studio API calls, as well as common functions for dynamic 
 > 
 > **params.onReady:Function**  
 > *Callback funciton to run after API is initalized*
+
+> **USAGE:**  
+> **DYNAMIC CANVAS**:  
+> `spongeapi.init({type:'canvas',initObj:loader,isDynamic:true});`
 > 
->> **USAGE:**  
->> **DYNAMIC CANVAS**: *spongeapi.init({type:'canvas',initObj:loader,isDynamic:true});*
+> **DYNAMIC GOOGLE WEB DESIGNER**:  
+> `spongeapi.init({type:'gwd',initObj:gwdAd,isDynamic:true});`
 
 #### openLanding(landingPage)
 *Open a landing page set up in studio (standard or dynamic)*  
