@@ -5,7 +5,6 @@ SPONGEAPI v1.1
 var iframeId, iid, handleSetupResponse;
 var spongeapi = spongeapi || {};
 spongeapi.initComplete = false;
-
  
 spongeapi.init = function(params,initObj,isDynamic,onReady){
 	iid = window.location.search.slice(1);
