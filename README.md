@@ -16,9 +16,7 @@ A wrapper for Studio API calls, as well as common functions for dynamic integrat
 
 ####USAGE:
 ***
-**FLASH CANVAS (NON-DYNAMIC)**:  
-*Always move the js matching your html file name into the 'assets' folder and adjust the script path to match.*  
-
+**FLASH CANVAS (NON-DYNAMIC)**:
 Include the following scripts:
 
 ~~~
