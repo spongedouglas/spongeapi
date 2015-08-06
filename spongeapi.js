@@ -69,7 +69,6 @@ spongeapi.getDynamicImage = function(prop){
 spongeapi.parseEdge = function()
 {
 	for (var property in spongecell.apiData.properties) {
-		console.log(property);
 		var el = spongeapi.initObj.$(property);
 
 		if(el){
