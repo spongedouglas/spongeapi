@@ -10,6 +10,7 @@
 <script src="assets/movieclip-0.7.1.min.js"></script>
 <script src="assets/preloadjs-0.4.1.min.js"></script>
 <script src="assets/flash-canvas-api.js"></script>
+<script type="text/javascript" src="test_data.js"></script>
 <style type="text/css">body {margin:0;}</style>
 <script>
 var canvas, stage, exportRoot;
@@ -22,7 +23,7 @@ function init() {
 	loader.addEventListener("fileload", handleFileLoad);
 	loader.addEventListener("complete", handleComplete);
 	//loader.loadManifest(lib.properties.manifest);
-	spongeapi.init('canvas',loader,true);
+	spongeapi.init({type:'canvas',isDynamic:true,initObj:loader});
 	
 }
 
@@ -31,10 +32,10 @@ function handleFileLoad(evt) {
 }
 
 function handleComplete() {
-	console.log('Canvas::handleComplete()');
 	exportRoot = new lib.flashcanvasapi();
 	stage = new createjs.Stage(canvas);
 	stage.addChild(exportRoot);
+	stage.enableMouseOver(1);
 	spongeapi.parseDynamicCanvasText();
 	stage.update();
 

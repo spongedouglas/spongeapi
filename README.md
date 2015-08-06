@@ -44,6 +44,11 @@ Used as a wrapper for Studio API calls, as well as common functions for dynamic 
 #### parseDynamicClasses()
 *Update text & images with dynamic assets & properties matching class names to signal processor properties*
 
+#### parseEdge()
+*Parse the flash library for dynamic images*  
+> **USAGE:**  
+> Auto-parses any element instance names that match dynamic properties.
+
 #### parseDynamicCanvasImages()
 *Parse the flash library for dynamic images*  
 > **USAGE:**  

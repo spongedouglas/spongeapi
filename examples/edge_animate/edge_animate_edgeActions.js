@@ -25,24 +25,46 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
       //Edge binding end
 
       Symbol.bindElementAction(compId, symbolName, "document", "compositionReady", function(sym, e) {
-         spongeapi.init('edge',sym,true);
+         spongeapi.init({type:'edge',initObj:sym,isDynamic:true});
+         
 
       });
       //Edge binding end
 
-      Symbol.bindElementAction(compId, symbolName, "${image1}", "click", function(sym, e) {
-         spongeapi.openLanding('dynamicLink');
+      
+
+      
+
+      
+
+      Symbol.bindElementAction(compId, symbolName, "${CTA}", "click", function(sym, e) {
+         spongeapi.openLanding('ctaLink');
 
       });
       //Edge binding end
 
-      Symbol.bindElementAction(compId, symbolName, "${headline1}", "click", function(sym, e) {
-         spongeapi.openScreen('Screen1');
+      Symbol.bindElementAction(compId, symbolName, "${background}", "click", function(sym, e) {
+         spongeapi.openLanding('backgroundLink');
+
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${frame1}", "click", function(sym, e) {
+         spongeapi.openScreen('Sub Screen');
+         
 
       });
       //Edge binding end
 
    })("stage");
    //Edge symbol end:'stage'
+
+   //=========================================================
+   
+   //Edge symbol: 'CTA'
+   (function(symbolName) {   
+   
+   })("CTA");
+   //Edge symbol end:'CTA'
 
 })(window.jQuery || AdobeEdge.$, AdobeEdge, "EDGE-45551221");

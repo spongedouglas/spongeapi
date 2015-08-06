@@ -6,16 +6,22 @@ var iframeId, iid, handleSetupResponse;
 var spongeapi = spongeapi || {};
 spongeapi.initComplete = false;
 
-spongeapi.init = function(params){
-
+ 
+spongeapi.init = function(params,initObj,isDynamic,onReady){
 	iid = window.location.search.slice(1);
 	window.spongecell = window.spongecell || {};
-
-	spongeapi.type = params.type;
-	spongeapi.initObj = params.initObj;
-	spongeapi.isDynamic = params.isDynamic;
-	spongeapi.onReady = params.onReady;
-	spongeapi.testData = params.testData;
+	if(params.hasOwnProperty('type')){
+		spongeapi.type = params.type;
+		spongeapi.initObj = params.initObj;
+		spongeapi.isDynamic = params.isDynamic;
+		spongeapi.onReady = params.onReady;
+	} else {
+		// SUPPORT FOR v1.0 INIT METHOD
+		spongeapi.type = params;
+		spongeapi.initObj = initObj;
+		spongeapi.isDynamic = isDynamic;
+		spongeapi.onReady = onReady;
+	}
 
 	if(window == parent.top){
 		handleSetupResponse();
@@ -32,21 +38,25 @@ spongeapi.init = function(params){
 
 
 spongeapi.openScreen = function(screenName){
-	parent.postMessage(JSON.stringify({
-	  iid: iid,
-	  topic: 'nav',
-	  type: 'api',
-	  screen: screenName
-	}), '*');
+	if(window != parent.top){
+		parent.postMessage(JSON.stringify({
+		  iid: iid,
+		  topic: 'nav',
+		  type: 'api',
+		  screen: screenName
+		}), '*');
+	} else {console.log('openScreen('+screenName+')')}
 };
 
 spongeapi.openLanding = function(landingPage){
-	parent.postMessage(JSON.stringify({
-	    iid: iid,
-	    topic: 'nav',
-	    type: 'api',
-	    landingPage: spongecell.apiData.landingPages[landingPage]
-	  }), '*');
+	if(window != parent.top){
+		parent.postMessage(JSON.stringify({
+		    iid: iid,
+		    topic: 'nav',
+		    type: 'api',
+		    landingPage: spongecell.apiData.landingPages[landingPage]
+		  }), '*');
+	} else {console.log('openLanding('+landingPage+'): '+ spongecell.apiData.landingPages[landingPage].url)}
 };
 
 spongeapi.getDynamicText = function(prop){
@@ -60,16 +70,15 @@ spongeapi.getDynamicImage = function(prop){
 spongeapi.parseEdge = function()
 {
 	for (var property in spongecell.apiData.properties) {
-		var el = sym.$(property);
+		console.log(property);
+		var el = spongeapi.initObj.$(property);
 
 		if(el){
 			el.text(spongecell.apiData.properties[property].text);
 		}
 	}
-
-	// MATCH DYNAMIC IMAGES
 	for (var property in spongecell.apiData.assets) {
-    	var el = sym.$(property);
+    	var el = spongeapi.initObj.$(property);
     	if(el){
 			el.css({'background-image':'url('+spongecell.apiData.assets[property].src+')'});
     	}
@@ -83,13 +92,13 @@ spongeapi.parseDynamicCanvasImages = function()
 	{
 
 		if(spongecell.apiData.assets.hasOwnProperty(libImg.id)){
+			libImg.crossOrigin = 'Anonymous';
 			libImg.src = spongeapi.getDynamicImage(libImg.id);
 		}
 	}
 }
 spongeapi.parseDynamicCanvasText = function()
 {
-	console.log('parseDynamicCanvasText()');
 	for (var property in spongecell.apiData.properties) {
     	if(exportRoot[property]){
     		exportRoot[property].txt.text = spongeapi.getDynamicText(property);
@@ -127,16 +136,9 @@ spongeapi.parseDynamicClasses = function()
 handleSetupResponse = function(message) {
 	if(!spongeapi.initComplete){
 		window.spongecell.apiData = message || {};
-
-		console.log('API::handleSetupResponse');
-		if(!spongecell.apiData.assets){
-
-			//spongecell.apiData = JSON.parse('');
+		if(!spongecell.apiData.assets && testData){
+			spongecell.apiData = testData;
 		}
-		console.log(spongecell.apiData.landingPages);
-		console.log(spongecell.apiData.assets);
-		console.log(spongecell.apiData.properties);
-
 		switch(spongeapi.type)
 		{
 			case 'canvas':
@@ -148,8 +150,7 @@ handleSetupResponse = function(message) {
 			if(spongeapi.isDynamic && spongecell.apiData.properties) spongeapi.parseDynamicClasses();
 			break;
 			case 'edge':
-			console.log('edge');
-			spongeapi.parseEdge();
+			if(spongeapi.isDynamic && spongecell.apiData.properties) spongeapi.parseEdge();
 			break;
 			case 'custom':
 			if(spongeapi.isDynamic && spongecell.apiData.properties) spongeapi.parseDynamicClasses();
@@ -163,6 +164,5 @@ window.addEventListener('message', function(event) {
   var message = event.data;
   if (message) {
 	eval(message.callback)(message.data);
-
   }
 });

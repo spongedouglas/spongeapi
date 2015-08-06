@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>flash-canvas-api</title>
+<script type="text/javascript" src="test_data.js"></script>
+<script src="assets/spongeapi.js"></script>
+<script src="assets/easeljs-0.8.1.min.js"></script>
+<script src="assets/tweenjs-0.6.1.min.js"></script>
+<script src="assets/movieclip-0.8.1.min.js"></script>
+<script src="assets/preloadjs-0.6.1.min.js"></script>
+<script src="assets/flash-canvas-api.js"></script>
+
+<script>
+var canvas, stage, exportRoot;
+
+function init() {
+	canvas = document.getElementById("canvas");
+	images = images||{};
+
+	var loader = new createjs.LoadQueue(false);
+	loader.addEventListener("fileload", handleFileLoad);
+	loader.addEventListener("complete", handleComplete);
+	//loader.loadManifest(lib.properties.manifest);
+	// INITIALIZE SPONGEAPI
+	spongeapi.init({type:'canvas',initObj:loader,isDynamic:true})
+}
+
+function handleFileLoad(evt) {
+	if (evt.item.type == "image") { images[evt.item.id] = evt.result; }
+}
+
+function handleComplete(evt) {
+	exportRoot = new lib.flashcanvasapi();
+
+	stage = new createjs.Stage(canvas);
+	stage.addChild(exportRoot);
+	
+	// AUTO PARSE DYNAMIC TEXT
+	spongeapi.parseDynamicCanvasText();
+	
+	stage.update();
+	stage.enableMouseOver();
+
+	createjs.Ticker.setFPS(lib.properties.fps);
+	createjs.Ticker.addEventListener("tick", stage);
+}
+</script>
+</head>
+
+<body onload="init();" style="background-color:#D4D4D4">
+	<canvas id="canvas" width="300" height="250" style="background-color:#FFFFFF"></canvas>
+</body>
+</html>

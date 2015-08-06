@@ -5,28 +5,36 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 	<title>Spongecell Edge 2015 Studio Test</title>
 <!--Adobe Edge Runtime-->
-    <script type="text/javascript" charset="utf-8" src="http://animate.adobe.com/runtime/6.0.0/edge.6.0.0.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="edge_includes/edge.6.0.0.min.js"></script>
     <style>
         .edgeLoad-EDGE-45551221 { visibility:hidden; }
     </style>
 <script>
-   AdobeEdge.loadComposition('edge_animate_sponge', 'EDGE-45551221', {
+   AdobeEdge.loadComposition('edge_animate', 'EDGE-45551221', {
     scaleToFit: "none",
     centerStage: "none",
     minW: "0px",
     maxW: "undefined",
     width: "300px",
     height: "250px"
-}, {"dom":{}}, {"style":{"${symbolSelector}":{"isStage":"true","rect":["undefined","undefined","300px","250px"],"fill":["rgba(255,255,255,1)"]}},"dom":{}});
+}, {dom: [ ]}, {
+    dom: [
+
+    ],
+    style: {
+        '${symbolSelector}': {
+            isStage: true,
+            rect: [undefined, undefined, '300px', '250px'],
+            fill: ["rgba(255,255,255,1)"]
+        }
+    }
+});
 </script>
 <!--Adobe Edge Runtime End-->
 
 </head>
 <body style="margin:0;padding:0;">
 	<div id="Stage" class="EDGE-45551221">
-	
-        <div id="Stage_image1" class="edgeLoad-EDGE-45551221 image1"></div>
-        <div id="Stage_headline1" class="edgeLoad-EDGE-45551221 headline1"><p style="margin: 0px;">headline1</p></div>
-    </div>
+	</div>
 </body>
 </html>
