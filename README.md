@@ -76,7 +76,7 @@ spongeapi.init({type:'canvas',initObj:loader,isDynamic:true});
    <script type="text/javascript" src="assets/spongeapi.js"></script>
 	~~~
 
-4. Switch back to Design View and add an event to the first frame of the timeline. (Action > Custom > Add custom action), and add the following code:
+4. Switch back to Design View and add an event  to the first frame of the timeline. (Action > Custom > Add custom action), and add the following code:
 
 	~~~
 	var onReady = function() {    
@@ -131,6 +131,6 @@ spongeapi.init({type:'canvas',initObj:loader,isDynamic:true});
 >You have a textfield named "ctaTxt" inside a movieclip named "ctaMC", and a dynamic text item property named "dynamic\_cta\_txt".
 
 >_**Solution:**_
->Add the following line on a frame inside the ctaMC: 
+>Add the following line on a frame inside the ctaMC:  
 >`this.ctaTxt.text = spongeapi.getDynamicText("dynamic_cta_txt");`
 
