@@ -62,6 +62,7 @@
 			"timelineColor2":"0x5a558a",
 			"timelineColor3":"0x4a485e",
 			"timelineColor":"0x63599f"},
+		"dummyStageParentHeight":"250px",
 		"element_${copy}":{
 			"timelineColor2":"0x107faa",
 			"animationEnabled":"false",
@@ -95,7 +96,7 @@
 			"timelineTreeOpened":"false",
 			"animationEnabled":"true",
 			"invisible":"false"},
-		"dummyStageParentHeight":"250px",
+		"codeTreeElementPopupFilter":"",
 		"element_${headline1Copy}":{
 			"timelineColor2":"0x168c84",
 			"animationEnabled":"false",
