@@ -110,14 +110,14 @@ spongeapi.parseDynamicCanvasText = function()
 spongeapi.parseDynamicClasses = function()
 {
 	var el;
-	
-
 	for (var property in spongecell.apiData.properties) {
 		el = document.getElementsByClassName(property);
     	if(el.length > 0){
     		for(var i = 0; i < el.length; i++){
 	    		el[i].innerHTML = spongeapi.getDynamicText(property);
 	    	}
+    	} else if(el = document.getElementById(property)) {
+    		el.innerHTML = spongeapi.getDynamicText(property);
     	}
     }
 
@@ -128,6 +128,9 @@ spongeapi.parseDynamicClasses = function()
 	    		el[i].src = spongeapi.getDynamicImage(property);
 	    		el[i].setAttribute('source',spongeapi.getDynamicImage(property));
 	    	}
+    	}else if(el = document.getElementById(property)) {
+    		el.src = spongeapi.getDynamicImage(property);
+	    	el.setAttribute('source',spongeapi.getDynamicImage(property));
     	}
 	}
 }
@@ -145,7 +148,6 @@ handleSetupResponse = function(message) {
 			spongeapi.initObj.loadManifest(lib.properties.manifest);
 			break;
 			case 'gwd':
-			spongeapi.initObj.initAd();
 			if(spongeapi.isDynamic && spongecell.apiData.properties) spongeapi.parseDynamicClasses();
 			break;
 			case 'edge':

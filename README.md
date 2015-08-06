@@ -19,7 +19,7 @@ Used as a wrapper for Studio API calls, as well as common functions for dynamic 
 > `spongeapi.init({type:'canvas',initObj:loader,isDynamic:true});`
 > 
 > *DYNAMIC GOOGLE WEB DESIGNER*:  
-> `spongeapi.init({type:'gwd',initObj:gwdAd,isDynamic:true});`
+> `spongeapi.init({type:'gwd',initObj:this,isDynamic:true});`
 
 #### openLanding(landingPage)
 *Open a landing page set up in studio (standard or dynamic)*  
