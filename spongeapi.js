@@ -5,7 +5,7 @@ SPONGEAPI v1.1
 var iframeId, iid, handleSetupResponse;
 var spongeapi = spongeapi || {};
 spongeapi.initComplete = false;
- 
+
 spongeapi.init = function(params,initObj,isDynamic,onReady){
 	iid = window.location.search.slice(1);
 	window.spongecell = window.spongecell || {};
@@ -49,6 +49,7 @@ spongeapi.openScreen = function(screenName){
 
 spongeapi.openLanding = function(landingPage){
 	if(window != parent.top){
+        window.open(spongecell.apiData.landingPages[landingPage].url, '_blank');
 		parent.postMessage(JSON.stringify({
 		    iid: iid,
 		    topic: 'nav',
