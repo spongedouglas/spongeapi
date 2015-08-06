@@ -14,16 +14,17 @@ A wrapper for Studio API calls, as well as common functions for dynamic integrat
 > **params.onReady:Function**  
 > *Callback funciton to run after API is initalized.*
 
+
 ####USAGE:
 ***
 **FLASH CANVAS (NON-DYNAMIC)**:
-Include the following scripts:
+
+Place **spongeapi.js** in the assets folder and include it at the top of your HTML document. 
 
 ~~~
-<script type="text/javascript" src="test_data.js"></script>
 <script src="assets/spongeapi.js"></script>  
 ~~~
- 
+
 Replace this line: 
 
 ~~~
@@ -38,31 +39,52 @@ spongeapi.init({type:'canvas',initObj:loader});
 
 ***
 **FLASH CANVAS (DYNAMIC)**:  
-Same as Non-Dynamic setup, with the addition of the 'isDynamic' parameter, set to true.
+
+Place **spongeapi.js** in the assets folder and include it at the top of your HTML document. A .js file containing test data may be included for local testing. 
+
+~~~
+<script type="text/javascript" src="test_data.js"></script>
+<script src="assets/spongeapi.js"></script>  
+~~~
+
+
+Same as Non-Dynamic setup, with the addition of the 'isDynamic' parameter, set to true. 
 
 ~~~
 spongeapi.init({type:'canvas',initObj:loader,isDynamic:true});
 ~~~
 
 ***
-**EDGE ANIMATE (Dynamic)**:  
-Add a new action to the stage for the 'compositionReady' event. (From the Code window, click the + next to the Stage), and add the following code:
+**EDGE ANIMATE (Dynamic)**:
 
-~~~
-spongeapi.init({type:'edge',initObj:sym,isDynamic:true});
-~~~
+1. Click the **+** in the Scripts sub-panel of the Library, select "Add JS File from Disk...", and add **spongeapi.js** and the optional **test_data.js**.
+
+2. Add a new action to the stage for the 'compositionReady' event. (From the Code window, click the + next to the Stage), and add the following code:
+
+	~~~
+	spongeapi.init({type:'edge',initObj:sym,isDynamic:true});
+	~~~
 
 ***
 **GOOGLE WEB DESIGNER (Dynamic)**:  
-Add a custom action to the first frame of the timeline. (Action > Custom > Add custom action), and add the following code:
 
-~~~
-var onReady = function() {    
-	spongeapi.initObj.classList.remove('gwd-pause-animation');  
-}  
-this.classList.add('gwd-pause-animation');  
-spongeapi.init({type: 'gwd',initObj: this,isDynamic: true,onReady: onReady });
-~~~
+1. Add **spongeapi.js** to an assets folder relative to your GWD html document.
+2. Open the animation in GWD, and switch to Code View.
+3. Paste in the following code anywhere within the \<head\> tags:  
+
+	~~~
+   <script type="text/javascript" src="assets/spongeapi.js"></script>
+	~~~
+
+4. Switch back to Design View and add an event to the first frame of the timeline. (Action > Custom > Add custom action), and add the following code:
+
+	~~~
+	var onReady = function() {    
+		spongeapi.initObj.classList.remove('gwd-pause-animation');  
+	}  
+	this.classList.add('gwd-pause-animation');  
+	spongeapi.init({type: 'gwd',initObj: this,isDynamic: true,onReady: onReady });
+	~~~
 
 ### openLanding(landingPage)
 *Open a landing page set up in Studio (standard or dynamic)*  
