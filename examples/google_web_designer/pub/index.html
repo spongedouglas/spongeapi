@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head data-gwd-animation-mode="proMode"><meta name="GCD" content="YTk3ODQ3ZWZhN2I4NzZmMzBkNTEwYjJl412ec60fcad340ba9702cf373e4125d3"/>
+<html><head data-gwd-animation-mode="proMode"><meta name="GCD" content="YTk3ODQ3ZWZhN2I4NzZmMzBkNTEwYjJlc107557b992487fada66e5a9a1e912e0"/>
   
   
   <script data-source="custom.elements.min.js" type="text/javascript">/**
@@ -48,176 +48,7 @@ typeof a.gwdLoad||"function"!=typeof a.gwdIsLoaded||a.gwdIsLoaded()?!1:!0},this)
 else for(var a=this.a.length-1;0<=a;a--)this.a[a].gwdLoad()},enumerable:!0},handleReadyEvent_:{value:function(a){a=this.a.indexOf(a.target);0<=a&&(this.a.splice(a,1),0==this.a.length&&this.firePageReadyEvent_())},enumerable:!1},firePageReadyEvent_:{value:function(){this.style.visibility="";this.b||(d("ready",this),d("pageload",this));this.b=!0},enumerable:!1},gwdPresent:{value:function(){d("pagepresenting",this);this.classList.add("gwd-play-animation")},enumerable:!0},isPortrait:{value:function(){return this.e}}}),
 "extends":"div"});}()
 </script>
-  <script type="text/javascript">/*
-SPONGEAPI v1.1
-*/
-
-var iframeId, iid, handleSetupResponse;
-var spongeapi = spongeapi || {};
-spongeapi.initComplete = false;
- 
-spongeapi.init = function(params,initObj,isDynamic,onReady){
-	iid = window.location.search.slice(1);
-	window.spongecell = window.spongecell || {};
-	if(params.hasOwnProperty('type')){
-		spongeapi.type = params.type;
-		spongeapi.initObj = params.initObj;
-		spongeapi.isDynamic = params.isDynamic;
-		spongeapi.onReady = params.onReady;
-	} else {
-		// SUPPORT FOR v1.0 INIT METHOD
-		spongeapi.type = params;
-		spongeapi.initObj = initObj;
-		spongeapi.isDynamic = isDynamic;
-		spongeapi.onReady = onReady;
-	}
-
-	if(window == parent.top){
-		handleSetupResponse();
-	} else {
-		parent.postMessage(JSON.stringify({
-		  type: 'api',
-		  topic: 'setup',
-		  iid: iid,
-		  callback: 'handleSetupResponse'
-		}), '*');
-	}
-
-};
-
-
-spongeapi.openScreen = function(screenName){
-	if(window != parent.top){
-		parent.postMessage(JSON.stringify({
-		  iid: iid,
-		  topic: 'nav',
-		  type: 'api',
-		  screen: screenName
-		}), '*');
-	} else {console.log('openScreen('+screenName+')')}
-};
-
-spongeapi.openLanding = function(landingPage){
-	if(window != parent.top){
-		parent.postMessage(JSON.stringify({
-		    iid: iid,
-		    topic: 'nav',
-		    type: 'api',
-		    landingPage: spongecell.apiData.landingPages[landingPage]
-		  }), '*');
-	} else {console.log('openLanding('+landingPage+'): '+ spongecell.apiData.landingPages[landingPage].url)}
-};
-
-spongeapi.getDynamicText = function(prop){
-	return (spongecell.apiData.properties) ? spongecell.apiData.properties[prop].text : prop;
-};
-
-spongeapi.getDynamicImage = function(prop){
-	return (spongecell.apiData.assets) ? spongecell.apiData.assets[prop].src : prop;
-};
-
-spongeapi.parseEdge = function()
-{
-	for (var property in spongecell.apiData.properties) {
-		console.log(property);
-		var el = spongeapi.initObj.$(property);
-
-		if(el){
-			el.text(spongecell.apiData.properties[property].text);
-		}
-	}
-	for (var property in spongecell.apiData.assets) {
-    	var el = spongeapi.initObj.$(property);
-    	if(el){
-			el.css({'background-image':'url('+spongecell.apiData.assets[property].src+')'});
-    	}
-	}
-}
-
-spongeapi.parseDynamicCanvasImages = function()
-{
-	var libImg;
-	for(var i=0; libImg = lib.properties.manifest[i]; i++)
-	{
-
-		if(spongecell.apiData.assets.hasOwnProperty(libImg.id)){
-			libImg.crossOrigin = 'Anonymous';
-			libImg.src = spongeapi.getDynamicImage(libImg.id);
-		}
-	}
-}
-spongeapi.parseDynamicCanvasText = function()
-{
-	for (var property in spongecell.apiData.properties) {
-    	if(exportRoot[property]){
-    		exportRoot[property].txt.text = spongeapi.getDynamicText(property);
-    	}
-    }
-
-
-}
-
-spongeapi.parseDynamicClasses = function()
-{
-	var el;
-	for (var property in spongecell.apiData.properties) {
-		el = document.getElementsByClassName(property);
-    	if(el.length > 0){
-    		for(var i = 0; i < el.length; i++){
-	    		el[i].innerHTML = spongeapi.getDynamicText(property);
-	    	}
-    	} else if(el = document.getElementById(property)) {
-    		el.innerHTML = spongeapi.getDynamicText(property);
-    	}
-    }
-
-    for (var property in spongecell.apiData.assets) {
-    	el = document.getElementsByClassName(property);
-    	if(el.length > 0){
-    		for(var i = 0; i < el.length; i++){
-	    		el[i].src = spongeapi.getDynamicImage(property);
-	    		el[i].setAttribute('source',spongeapi.getDynamicImage(property));
-	    	}
-    	}else if(el = document.getElementById(property)) {
-    		el.src = spongeapi.getDynamicImage(property);
-	    	el.setAttribute('source',spongeapi.getDynamicImage(property));
-    	}
-	}
-}
-
-handleSetupResponse = function(message) {
-	if(!spongeapi.initComplete){
-		window.spongecell.apiData = message || {};
-		if(!spongecell.apiData.assets && testData){
-			spongecell.apiData = testData;
-		}
-		switch(spongeapi.type)
-		{
-			case 'canvas':
-			if(spongeapi.isDynamic && spongecell.apiData.assets) spongeapi.parseDynamicCanvasImages();
-			spongeapi.initObj.loadManifest(lib.properties.manifest);
-			break;
-			case 'gwd':
-			//spongeapi.initObj.initAd();
-			if(spongeapi.isDynamic && spongecell.apiData.properties) spongeapi.parseDynamicClasses();
-			break;
-			case 'edge':
-			if(spongeapi.isDynamic && spongecell.apiData.properties) spongeapi.parseEdge();
-			break;
-			case 'custom':
-			if(spongeapi.isDynamic && spongecell.apiData.properties) spongeapi.parseDynamicClasses();
-			break;
-		}
-		if(spongeapi.onReady) spongeapi.onReady();
-	}
-	spongeapi.initComplete = true;
-}
-window.addEventListener('message', function(event) {
-  var message = event.data;
-  if (message) {
-	eval(message.callback)(message.data);
-  }
-});</script>
+  <script type="text/javascript" src="https://live-ssl.cdn.spongecell.com/studio/api/v1/spongeapi.min.js"></script>
   <script data-source="gwdpagedeck_min.js" data-version="1.5" data-exports-type="gwd-pagedeck" type="text/javascript">-function(){"use strict";var k=["-ms-","-moz-","-webkit-",""],l=function(a,c){for(var b,d,e=0;e<k.length;++e)b=k[e]+"transition-duration",d=""+c,a.style.setProperty(b,d)};function m(a,c,b,d,e,g,f){this.h=a;this.f=c;this.m=b;a=d||"none";this.g=e="none"===a?0:e||1E3;this.d=g||"linear";this.e=[];if(e){g=f||"top";if(f=this.h){f.classList.add("gwd-page");f.classList.add("center");f="center";if("push"==a)switch(g){case "top":f="top";break;case "bottom":f="bottom";break;case "left":f="left";break;case "right":f="right"}this.e.push(f);"fade"==a&&this.e.push("transparent")}f=this.f;e="center";if("none"!=a&&"fade"!=a)switch(g){case "top":e="bottom";break;case "bottom":e="top";
 break;case "left":e="right";break;case "right":e="left"}f.classList.add(e);f.classList.add("gwd-page");"fade"==a&&f.classList.add("transparent")}}m.prototype.start=function(){if(this.g){var a=this.h,c=this.f;n(c,this.r.bind(this));a&&(l(a,this.g+"ms"),a.classList.add(this.d));l(c,this.g+"ms");c.classList.add(this.d);c.setAttribute("gwd-reflow",c.offsetWidth);if(a)for(var b=0;b<this.e.length;++b)a.classList.add(this.e[b]);p(c)}else this.m()};
 var q=function(a,c,b,d){b="transform: matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,"+b+","+d+",0,1);";return a+"."+c+"{-webkit-"+b+"-moz-"+b+"-ms-"+b+b+"}"},r="center top bottom left right transparent".split(" "),p=function(a){r.forEach(function(c){a.classList.remove(c)})},n=function(a,c){var b=function(){a.removeEventListener("webkitTransitionEnd",b);a.removeEventListener("transitionend",b);c()};a.addEventListener("webkitTransitionEnd",b);a.addEventListener("transitionend",b)};
@@ -273,14 +104,14 @@ f("ready",this)},enumerable:!1},applyScaling_:{value:function(){if(2==this.a){va
     <div is="gwd-pagedeck" class="gwd-page-container" id="pagedeck">
       <div is="gwd-page" id="page1" class="gwd-page-wrapper gwd-page-size gwd-lightbox" data-gwd-width="300px" data-gwd-height="250px" style="">
         <div class="gwd-page-content gwd-page-size" style="">
-          <img is="gwd-image" source="assets/background.jpg" id="background" class="gwd-img-6gj9">
+          <img is="gwd-image" source="background.jpg" id="background" class="gwd-img-6gj9">
           <div class="gwd-div-jbxv gwd-div-a6rq" id="legal"></div>
           <div class="gwd-div-uzc7" id="headline">HEADLINE</div>
           <div class="gwd-div-jbxv gwd-div-lzc4" id="copy"></div>
           <div class="gwd-div-tk8l" id="cta">
             <div class="gwd-div-j3m0 editable">CTA</div>
           </div>
-          <img is="gwd-image" source="assets/spongecell.png" id="frame1" class="gwd-img-367b gwd-gen-f26ggwdanimation">
+          <img is="gwd-image" source="spongecell.png" id="frame1" class="gwd-img-367b gwd-gen-f26ggwdanimation">
           <div class="gwd-animation-event event-1-animation" data-event-name="event-1" data-event-time="0.01"></div>
           <gwd_animation_pause_element></gwd_animation_pause_element>
         </div>
