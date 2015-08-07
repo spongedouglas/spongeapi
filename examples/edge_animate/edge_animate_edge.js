@@ -17,7 +17,7 @@
         ],
         scripts = [
             js+"test_data.js",
-            js+"spongeapi.js"
+            "https://live-ssl.cdn.spongecell.com/studio/api/v1/spongeapi.min.js"
         ],
         symbols = {
             "stage": {
@@ -107,6 +107,16 @@
                             '167px'
                         ],
                         [
+                            "eid22",
+                            "opacity",
+                            443,
+                            1406,
+                            "linear",
+                            "${frame1}",
+                            '0',
+                            '1'
+                        ],
+                        [
                             "eid28",
                             "width",
                             443,
@@ -117,12 +127,12 @@
                             '198px'
                         ],
                         [
-                            "eid22",
+                            "eid17",
                             "opacity",
-                            443,
-                            1406,
+                            0,
+                            2997,
                             "linear",
-                            "${frame1}",
+                            "${headline}",
                             '0',
                             '1'
                         ],
@@ -135,16 +145,6 @@
                             "${headline}",
                             '8px',
                             '8px'
-                        ],
-                        [
-                            "eid17",
-                            "opacity",
-                            0,
-                            2997,
-                            "linear",
-                            "${headline}",
-                            '0',
-                            '1'
                         ],
                         [
                             "eid29",
@@ -179,34 +179,33 @@
                 content: {
                     dom: [
                         {
-                            rect: ['0px', '0px', '87px', '28px', 'auto', 'auto'],
+                            type: 'rect',
                             id: 'Rectangle',
                             stroke: [0, 'rgba(0,0,0,1)', 'none'],
-                            type: 'rect',
+                            rect: ['0px', '0px', '87px', '28px', 'auto', 'auto'],
                             fill: ['rgba(192,192,192,1)']
                         },
                         {
-                            rect: ['27px', '5px', 'auto', 'auto', 'auto', 'auto'],
-                            textStyle: ['', '', '', '', 'none'],
                             font: ['Arial, Helvetica, sans-serif', [16, 'px'], 'rgba(0,0,0,1)', '400', 'none', 'normal', 'break-word', 'nowrap'],
-                            id: 'Text',
-                            text: '<p style=\"margin: 0px;\">​CTA</p>',
+                            type: 'text',
                             align: 'left',
-                            type: 'text'
+                            id: 'Text',
+                            textStyle: ['', '', '', '', 'none'],
+                            text: '<p style=\"margin: 0px;\">​CTA</p>',
+                            rect: ['27px', '5px', 'auto', 'auto', 'auto', 'auto']
                         },
                         {
                             rect: ['0px', '0px', '87px', '28px', 'auto', 'auto'],
-                            stroke: [0, 'rgba(0,0,0,1)', 'none'],
-                            id: 'RectangleCopy',
                             opacity: '0.01',
+                            id: 'RectangleCopy',
+                            stroke: [0, 'rgba(0,0,0,1)', 'none'],
                             type: 'rect',
                             fill: ['rgba(192,192,192,1)']
                         }
                     ],
                     style: {
                         '${symbolSelector}': {
-                            isStage: 'true',
-                            rect: [undefined, undefined, '87px', '28px']
+                            rect: [null, null, '87px', '28px']
                         }
                     }
                 },
