@@ -2,7 +2,7 @@
 SPONGEAPI v1.1
 */
 
-var iframeId, iid, handleSetupResponse;
+var iframeId, iid, handleSetupResponse,testData;
 var spongeapi = spongeapi || {};
 spongeapi.initComplete = false;
  
@@ -32,7 +32,6 @@ spongeapi.init = function(params,initObj,isDynamic,onReady){
 		  callback: 'handleSetupResponse'
 		}), '*');
 	}
-
 };
 
 
@@ -59,11 +58,11 @@ spongeapi.openLanding = function(landingPage){
 };
 
 spongeapi.getDynamicText = function(prop){
-	return (spongecell.apiData.properties) ? spongecell.apiData.properties[prop].text : prop;
+	return (spongecell) ? spongecell.apiData.properties[prop].text : prop;
 };
 
 spongeapi.getDynamicImage = function(prop){
-	return (spongecell.apiData.assets) ? spongecell.apiData.assets[prop].src : prop;
+	return (spongecell) ? spongecell.apiData.assets[prop].src : prop;
 };
 
 spongeapi.parseEdge = function()
@@ -143,17 +142,17 @@ handleSetupResponse = function(message) {
 		switch(spongeapi.type)
 		{
 			case 'canvas':
-			if(spongeapi.isDynamic && spongecell.apiData.assets) spongeapi.parseDynamicCanvasImages();
+			if(spongeapi.isDynamic && spongecell) spongeapi.parseDynamicCanvasImages();
 			spongeapi.initObj.loadManifest(lib.properties.manifest);
 			break;
 			case 'gwd':
-			if(spongeapi.isDynamic && spongecell.apiData.properties) spongeapi.parseDynamicClasses();
+			if(spongeapi.isDynamic && spongecell) spongeapi.parseDynamicClasses();
 			break;
 			case 'edge':
-			if(spongeapi.isDynamic && spongecell.apiData.properties) spongeapi.parseEdge();
+			if(spongeapi.isDynamic && spongecell) spongeapi.parseEdge();
 			break;
 			case 'custom':
-			if(spongeapi.isDynamic && spongecell.apiData.properties) spongeapi.parseDynamicClasses();
+			if(spongeapi.isDynamic && spongecell) spongeapi.parseDynamicClasses();
 			break;
 		}
 		if(spongeapi.onReady) spongeapi.onReady();

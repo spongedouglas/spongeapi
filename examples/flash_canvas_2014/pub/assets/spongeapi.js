@@ -49,6 +49,7 @@ spongeapi.openScreen = function(screenName){
 
 spongeapi.openLanding = function(landingPage){
 	if(window != parent.top){
+		console.log('openLanding('+landingPage+'): '+ spongecell.apiData.landingPages[landingPage].url);
 		parent.postMessage(JSON.stringify({
 		    iid: iid,
 		    topic: 'nav',
