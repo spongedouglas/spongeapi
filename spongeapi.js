@@ -37,17 +37,25 @@ spongeapi.init = function(params,initObj,isDynamic,onReady){
 };
 
 
+
 spongeapi.openScreen = function(screenName,options){
 	if(window != parent.top){
-		if(options.userInitiated){
+		if(options.postRoll){
 			parent.postMessage(JSON.stringify({
 			  iid: iid,
 			  topic: 'nav',
 			  type: 'api',
+			  engage: false,
 			  screen: screenName
 			}), '*');
 		} else {
-			
+			parent.postMessage(JSON.stringify({
+			  iid: iid,
+			  topic: 'nav',
+			  type: 'api',
+			  engage: true,
+			  screen: screenName
+			}), '*');
 		}
 	} else {console.log('openScreen('+screenName+')')}
 };
