@@ -36,19 +36,9 @@ spongeapi.init = function(params,initObj,isDynamic,onReady){
 	}
 };
 
-
-
 spongeapi.openScreen = function(screenName,options){
 	if(window != parent.top){
-		if(options.postRoll){
-			parent.postMessage(JSON.stringify({
-			  iid: iid,
-			  topic: 'nav',
-			  type: 'api',
-			  engage: false,
-			  screen: screenName
-			}), '*');
-		} else {
+		if(options.hasOwnProperty('engagement')) {
 			parent.postMessage(JSON.stringify({
 			  iid: iid,
 			  topic: 'nav',
@@ -56,8 +46,16 @@ spongeapi.openScreen = function(screenName,options){
 			  engage: true,
 			  screen: screenName
 			}), '*');
-		}
-	} else {console.log('openScreen('+screenName+')')}
+		} else {
+			parent.postMessage(JSON.stringify({
+			  iid: iid,
+			  topic: 'nav',
+			  type: 'api',
+			  engage: false,
+			  screen: screenName
+			}), '*');
+		} 
+	} else {console.log('openScreen('+screenName+','+options+')')}
 };
 
 spongeapi.openLanding = function(landingPage){
