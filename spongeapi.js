@@ -60,7 +60,7 @@ spongeapi.openScreen = function(screenName,options){
 
 spongeapi.openLanding = function(landingPage){
 	if(window != parent.top){
-        window.open(spongecell.apiData.landingPages[landingPage].url, '_blank');
+        //window.open(spongecell.apiData.landingPages[landingPage].url, '_blank'); UNCOMMENT ON NEXT RELEASE
 		parent.postMessage(JSON.stringify({
 		    iid: iid,
 		    topic: 'nav',
