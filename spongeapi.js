@@ -38,7 +38,7 @@ spongeapi.init = function(params,initObj,isDynamic,onReady){
 
 spongeapi.openScreen = function(screenName,options){
 	if(window != parent.top){
-		if(options.hasOwnProperty('engagement')) {
+		if(options && options.engagement) {
 			parent.postMessage(JSON.stringify({
 			  iid: iid,
 			  topic: 'nav',
