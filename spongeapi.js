@@ -6,7 +6,7 @@ var iframeId, iid, handleSetupResponse,testData;
 var spongeapi = spongeapi || {};
 var spongecell = spongecell || {};
 spongeapi.initComplete = false;
- 
+
 spongeapi.init = function(params,initObj,isDynamic,onReady){
 	iid = window.location.search.slice(1);
 	window.spongecell = window.spongecell || {};
@@ -157,9 +157,42 @@ handleSetupResponse = function(message) {
 			case 'canvas':
 			if(spongeapi.isDynamic && spongecell.apiData.assets) spongeapi.parseDynamicCanvasImages();
 			spongeapi.initObj.loadManifest(lib.properties.manifest);
+			/** PATCH FF TEXT BUG **/
+			var is_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+			if(is_firefox && createjs){
+				createjs.DisplayObject.prototype.setTransform = function(x, y, scaleX, scaleY, rotation, skewX, skewY, regX, regY) {
+					this.x = x || 0;
+					this.y = y || 0;
+					this.scaleX = scaleX == null ? 1 : scaleX;
+					this.scaleY = scaleY == null ? 1 : scaleY;
+					this.rotation = rotation || 0;
+					this.skewX = skewX || 0;
+					this.skewY = skewY || 0;
+					this.regX = regX || 0;
+					this.regY = regY || 0;
+					if(this.text && this.getMeasuredLineHeight){
+						var yOffset = this.getMeasuredLineHeight();
+						this.textBaseline = "top";
+						if(yOffset > 12 && yOffset < 50){
+							yOffset = this.getMeasuredLineHeight()*.3;
+						} else if(yOffset > 49){
+							yOffset = this.getMeasuredLineHeight()*.2;
+						} 
+						else {
+							yOffset = this.getMeasuredLineHeight()*.2;
+						}
+						this.y = Math.ceil(this.y+yOffset);
+					}
+					
+					return this;
+				};
+			}
 			break;
 			case 'gwd':
-			if(spongeapi.isDynamic && spongecell.apiData.properties) spongeapi.parseDynamicClasses();
+			spongeapi.initObj.initAd();
+			if(spongeapi.isDynamic && spongecell.apiData.properties) {
+				spongeapi.parseDynamicClasses();
+			}
 			break;
 			case 'edge':
 			if(spongeapi.isDynamic && spongecell.apiData.properties) spongeapi.parseEdge();
