@@ -36,7 +36,6 @@ spongeapi.onHover = function(selector, callback, flashStage) {
   var pY = null;
 
   var compare = function() {
-  	
     if ((typeof cX !== "undefined" && cX !== null) && (typeof cY !== "undefined" && cY !== null) && (typeof pX !== "undefined" && pX !== null) && (typeof pY !== "undefined" && pY !== null) && Math.abs(cX - pX) + Math.abs(cY - pY) < sensitivity) {
 
       if (topOnHoverCallback) {
@@ -62,14 +61,13 @@ spongeapi.onHover = function(selector, callback, flashStage) {
 
   var trackCanvas = function(evt){
 	var localPos = this.globalToLocal(stage.mouseX,stage.mouseY);
-	var targWidth = this.getBounds().width;
-	var targHeight = this.getBounds().height;
+	var targWidth = this.nominalBounds.width;
+	var targHeight = this.nominalBounds.height;
 	cX = (localPos.x > 0 && localPos.x <  targWidth) ? localPos.x : null;
 	cY = (localPos.y > 0 && localPos.y <  targHeight) ? localPos.y: null;
-  }
-
-  if(selector.hasOwnProperty('instance')){
-	canvas.addEventListener('mouseover', function(event) {
+ }
+  if(flashStage){
+		canvas.addEventListener('mouseover', function(event) {
 		var localPos = this.globalToLocal(stage.mouseX,stage.mouseY);
 		pX = localPos.x;
 		pY = localPos.y;
