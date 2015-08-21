@@ -1,11 +1,114 @@
 /*
-SPONGEAPI v1.1
+SPONGEAPI v1.2
+Added hover intent
 */
 
 var iframeId, iid, handleSetupResponse,testData;
 var spongeapi = spongeapi || {};
 var spongecell = spongecell || {};
+
+iid = window.location.search.slice(1);
 spongeapi.initComplete = false;
+
+spongeapi.onHover = function(selector, callback, flashStage) {
+  
+  var topOnHoverCallback = null;
+  var repeatInterval;
+
+  if (!selector) {
+    topOnHoverCallback = callback;
+    selector = document;
+  }
+
+  var interval = 350;
+  var sensitivity = 8;
+
+  var cX = null;
+  var cY = null;
+
+  var track = function(event) {
+    cX = event.pageX;
+    cY = event.pageY;
+  }
+
+  var timer = null;
+  var pX = null;
+  var pY = null;
+
+  var compare = function() {
+    if ((typeof cX !== "undefined" && cX !== null) && (typeof cY !== "undefined" && cY !== null) && (typeof pX !== "undefined" && pX !== null) && (typeof pY !== "undefined" && pY !== null) && Math.abs(cX - pX) + Math.abs(cY - pY) < sensitivity) {
+
+      if (topOnHoverCallback) {
+        topOnHoverCallback();
+        topOnHoverCallback = null;
+      }
+
+      selector.removeEventListener('mousemove', track);
+
+      if (callback !== topOnHoverCallback) {
+        callback();
+      }
+
+      if (repeatInterval) {
+        timer = setTimeout(compare, repeatInterval);
+      }
+
+    } else {
+      pX = cX; pY = cY;
+      timer = setTimeout(compare, interval);
+    }
+  }
+
+  var trackCanvas = function(evt){
+	var localPos = this.globalToLocal(stage.mouseX,stage.mouseY);
+	cX = localPos.x;
+	cY = localPos.y;
+  }
+
+  if(selector.hasOwnProperty('instance')){
+	canvas.addEventListener('mouseover', function(event) {
+		var localPos = this.globalToLocal(stage.mouseX,stage.mouseY);
+		pX = localPos.x;
+		pY = localPos.y;
+		canvas.addEventListener('mousemove', trackCanvas.bind(this), false);
+		timer = setTimeout(compare, interval);
+	}.bind(selector), false);
+
+	canvas.addEventListener('mouseout', function(event) {
+	    canvas.removeEventListener('mousemove', track);
+	    cX = cY = null;
+
+	    clearTimeout(timer);
+	  });
+
+  } else {
+	  selector.addEventListener('mouseenter', function(event) {
+	    pX = event.pageX;
+	    pY = event.pageY;
+	    selector.addEventListener('mousemove', track);
+
+	    timer = setTimeout(compare, interval);
+	  });
+
+	  selector.addEventListener('mouseleave', function(event) {
+	    selector.removeEventListener('mousemove', track);
+	    cX = cY = null;
+
+	    clearTimeout(timer);
+	  });
+  }
+
+}
+
+var engageCallback = function() {
+  parent.postMessage(JSON.stringify({
+    iid: iid,
+    topic: 'nav',
+    type: 'api',
+    engagement: true
+  }), '*');
+}
+//spongeapi.onHover(document, engageCallback);
 
 spongeapi.init = function(params,initObj,isDynamic,onReady){
 	iid = window.location.search.slice(1);
